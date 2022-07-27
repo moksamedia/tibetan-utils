@@ -32,7 +32,10 @@ export const unicodeConsonants = [
         (?<sixth>'[aeiou])
     )
 */
-export const wylieRegex = /(?<prefix>(g(?=(?:.?)(?:c|ny|t|d|n|ts|zh|z|.y|sh|s)))|(d(?=(?:.?)(?:k|g|ng|p|b|m|ky|gy|py|by|my|kr|gr|pr|br)))|(b(?=(?:.?)(?:k|g|c|t|d|ts|zh|z|sh|s|ky|gy|kr|gr|rl|sl|rk|rg|rng|rj|rny|rt|rd|rn|rts|rdz|lt|ld|st|sk|sg|sng|sny|st|sd|sn|sts|rky|rgy|sky|sgy|skr|sgr)))|(m(?=(?:.?)(?:kh|g|ng|ch|j|ny|th|d|n|tsh|dz|khy|gy|khr|gr)))|('(?=(?:.?)(?:kh|g|ch|j|th|d|ph|b|tsh|dz|khy|gy|phy|by|khr|gr|dr|phr|br))))?\.?(?<superscript>[rls]?)(?<root>k|kh|g|ng|c|ch|j|ny|t|th|d|n|p|ph|b|m|ts|tsh|dz|w|zh|z|'|y|r|l|sh|s|h)(?<subscript>[yrlw]?)(?<vowel>[aeiou])(((?<suffix>g|ng|d|n|b|m|'|r|l|s){0,1}(?<suffix2>g|s)?$)|(?<sixth>'[aeiou]))/
+//export const wylieRegex = /(?<prefix>(g(?=(?:.?)(?:c|ny|t|d|n|ts|zh|z|.y|sh|s)))|(d(?=(?:.?)(?:k|g|ng|p|b|m|ky|gy|py|by|my|kr|gr|pr|br)))|(b(?=(?:.?)(?:k|g|c|t|d|ts|zh|z|sh|s|ky|gy|kr|gr|rl|sl|rk|rg|rng|rj|rny|rt|rd|rn|rts|rdz|lt|ld|st|sk|sg|sng|sny|st|sd|sn|sts|rky|rgy|sky|sgy|skr|sgr)))|(m(?=(?:.?)(?:kh|g|ng|ch|j|ny|th|d|n|tsh|dz|khy|gy|khr|gr)))|('(?=(?:.?)(?:kh|g|ch|j|th|d|ph|b|tsh|dz|khy|gy|phy|by|khr|gr|dr|phr|br))))?\.?(?<superscript>[rls]?)(?<root>k|kh|g|ng|c|ch|j|ny|t|th|d|n|p|ph|b|m|ts|tsh|dz|w|zh|z|'|y|r|l|sh|s|h)(?<subscript>[yrlw]?)(?<vowel>[aeiou])(((?<suffix>g|ng|d|n|b|m|'|r|l|s){0,1}(?<suffix2>g|s)?$)|(?<sixth>'[aeiou]))/
+
+export const wylieRegex = /(?<prefix>g(?=c|ny|t|d|n|ts|zh|z|\.y|sh|s)|d(?=k|g|ng|p|b|m|ky|gy|py|by|my|kr|gr|pr|br)|b(?=k|g|c|t|d|ts|zh|z|sh|s|ky|gy|kr|gr|rl|sl|rk|rg|rng|rj|rny|rt|rd|rn|rts|rdz|lt|ld|st|sk|sg|sng|sny|st|sd|sn|sts|rky|rgy|sky|sgy|skr|sgr)|m(?=:kh|g|ng|ch|j|ny|th|d|n|tsh|dz|khy|gy|khr|gr)|'(?=kh|g|ch|j|th|d|ph|b|tsh|dz|khy|gy|phy|by|khr|gr|dr|phr|br))?\.?(?<superscript>[rls]?)(?<root>k|kh|g|ng|c|ch|j|ny|t|th|d|n|p|ph|b|m|ts|tsh|dz|w|zh|z|'|y|r|l|sh|s|h)(?<subscript>[yrlw]?)(?<vowel>[aeiou])(((?<suffix>g|ng|d|n|b|m|'|r|l|s){0,1}(?<suffix2>g|s)?$)|(?<sixth>'[aeiou]))/
+
 
 export const isWylie = (input) => {
   return input === jsEwts.toWylie(jsEwts.fromWylie(input))
@@ -132,49 +135,62 @@ function getSupSubRegex(stacks) {
   return new RegExp("^[" + stacks.replace(/་/g,'') + "]+$")
 }
 
+
+// SUPER RA
 const canSuperscriptRaStacks = "ཀ་ག་ང་ཇ་ཉ་ཏ་ད་ན་བ་མ་ཙ་ཛ་ཀྱ་གྱ་མྱ་"
 const canSuperscriptRaRegex = getSupSubRegex(canSuperscriptRaStacks)
 export function canSuperscriptRa(letter) {
   return canSuperscriptRaRegex.test(toUnicodeIfNecessary(letter))
 }
+export const stacksWithSuperscribedRa = "རྐ་རྒ་རྔ་རྗ་རྙ་རྟ་རྡ་རྣ་རྦ་རྨ་རྩ་རྫ་རྐྱ་རྒྱ་རྨྱ་"
 
+// SUPER LA
 const canSuperscriptLaStacks = "ཀ་ག་ང་ཅ་ཇ་ཏ་ད་པ་བ་ཧ་"
 const canSuperscriptLaRegex = getSupSubRegex(canSuperscriptLaStacks)
 export function canSuperscriptLa(letter) {
   return canSuperscriptLaRegex.test(toUnicodeIfNecessary(letter))
 }
+export const stacksWithSuperscribedLa = "ལྐ་ལྒ་ལྔ་ལྕ་ལྗ་ལྟ་ལྡ་ལྤ་ལྦ་ལྷ་"
 
+// SUPER SA
 const canSuperscriptSaStacks = "ཀ་ག་ང་ཉ་ཏ་ད་ན་པ་བ་མ་ཙ་ཀྱ་གྱ་པྱ་བྱ་མྱ་ཀྲ་གྲ་པྲ་མྲ་ནྲ་"
 const canSuperscriptSaRegex = getSupSubRegex(canSuperscriptSaStacks)
 export function canSuperscriptSa(letter) {
   return canSuperscriptSaRegex.test(toUnicodeIfNecessary(letter))
 }
+export const stacksWithSuperscribedSa = "སྐ་སྒ་སྔ་སྙ་སྟ་སྡ་སྣ་སྤ་སྦ་སྨ་སྩ་སྐྱ་སྒྱ་སྤྱ་སྦྱ་སྨྱ་སྐྲ་སྒྲ་སྤྲ་སྨྲ་སྣྲ་"
 
+// SUB YA
 const canSubscriptYaStacks = "ཀ་ཁ་ག་པ་ཕ་བ་མ་རྐ་རྒ་རྨ་སྐ་སྒ་སྤ་སྦ་སྨ་"
 const canSubscriptYaRegex = getSupSubRegex(canSubscriptYaStacks)
 export function canSubscriptYa(letter) {
   return canSubscriptYaRegex.test(toUnicodeIfNecessary(letter))
 }
+export const stacksWithSubscribedYa = "ཀྱ་ཁྱ་གྱ་པྱ་ཕྱ་བྱ་མྱ་རྐྱ་རྒྱ་རྨྱ་སྐྱ་སྒྱ་སྤྱ་སྦྱ་སྨྱ་"
 
+// SUB RA
 const canSubscriptRaStacks = "ཀ་ཁ་ག་ཏ་ཐ་ད་པ་ཕ་བ་མ་ཤ་ས་ཧ་སྐ་སྒ་སྤ་སྦྲ་སྨ་སྣ་"
 const canSubscriptRaRegex = getSupSubRegex(canSubscriptRaStacks)
 export function canSubscriptRa(letter) {
   return canSubscriptRaRegex.test(toUnicodeIfNecessary(letter))
 }
+export const stacksWithSubscribedRa = "ཀྲ་ཁྲ་གྲ་ཏྲ་ཐྲ་དྲ་པྲ་ཕྲ་བྲ་མྲ་ཤྲ་སྲ་ཧྲ་སྐྲ་སྒྲ་སྤྲ་སྦྲ་སྨྲ་སྣྲ་"
 
+// SUB LA
 const canSubscriptLaStacks = "ཀ་ག་བ་ཟ་ར་ས་"
 const canSubscriptLaRegex = getSupSubRegex(canSubscriptLaStacks)
 export function canSubscriptLa(letter) {
   return canSubscriptLaRegex.test(toUnicodeIfNecessary(letter))
 }
+export const stacksWithSubscribedLa = "ཀླ་གླ་བླ་ཟླ་རླ་སླ་"
 
+// SUB WA
 const canSubscriptWaStacks = "ཀ་ཁ་ག་ཅ་ཉ་ཏ་ད་ཙ་ཚ་ཞ་ཟ་ར་ལ་ཤ་ས་ཧ་གྲ་དྲ་ཕྱ་རྒ་རྩ་"
 const canSubscriptWaRegex = getSupSubRegex(canSubscriptWaStacks)
 export function canSubscriptWa(letter) {
   return canSubscriptWaRegex.test(toUnicodeIfNecessary(letter))
 }
-
-const stacksWithSuperscribedRa = "རྐ་རྒ་རྔ་རྗ་རྙ་རྟ་རྡ་རྣ་རྦ་རྨ་རྩ་རྫ་རྐྱ་རྒྱ་རྨྱ་"
+export const stacksWithSubscribedWa = "ཀྭ་ཁྭ་གྭ་ཅྭ་ཉྭ་ཏྭ་དྭ་ཙྭ་ཚྭ་ཞྭ་ཟྭ་རྭ་ལྭ་ཤྭ་སྭ་ཧྭ་གྲྭ་དྲྭ་ཕྱྭ་རྒྭ་རྩྭ་"
 
 export function hasSuperscribedRa(toTest) {
   return /^(g|d|b|m|')?r[^aiuoe]/.test(toWylieIfNecessary(toTest))
@@ -193,7 +209,7 @@ export function hasSubscribedRa(toTest) {
 }
 
 export function hasSubscribedYa(toTest) {
-  return /^(g|d|b|m|')?[^aiuoen]{1,2}y[aeiou]/.test(toWylieIfNecessary(toTest))
+  return /^(g\.|d|b|m|')?[^aiuoen]{1,2}y[aeiou]/.test(toWylieIfNecessary(toTest))
 }
 
 export function hasSubscribedLa(toTest) {
