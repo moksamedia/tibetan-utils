@@ -209,7 +209,7 @@ export function hasSubscribedRa(toTest) {
 }
 
 export function hasSubscribedYa(toTest) {
-  return /^(g\.|d|b|m|')?[^aiuoen]{1,2}y[aeiou]/.test(toWylieIfNecessary(toTest))
+  return /^(g.|d|b|m|')?[^aiuoen]{1,2}y[aeiou]/.test(toWylieIfNecessary(toTest))
 }
 
 export function hasSubscribedLa(toTest) {
