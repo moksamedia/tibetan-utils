@@ -34,7 +34,7 @@ export const unicodeConsonants = [
 */
 //export const wylieRegex = /(?<prefix>(g(?=(?:.?)(?:c|ny|t|d|n|ts|zh|z|.y|sh|s)))|(d(?=(?:.?)(?:k|g|ng|p|b|m|ky|gy|py|by|my|kr|gr|pr|br)))|(b(?=(?:.?)(?:k|g|c|t|d|ts|zh|z|sh|s|ky|gy|kr|gr|rl|sl|rk|rg|rng|rj|rny|rt|rd|rn|rts|rdz|lt|ld|st|sk|sg|sng|sny|st|sd|sn|sts|rky|rgy|sky|sgy|skr|sgr)))|(m(?=(?:.?)(?:kh|g|ng|ch|j|ny|th|d|n|tsh|dz|khy|gy|khr|gr)))|('(?=(?:.?)(?:kh|g|ch|j|th|d|ph|b|tsh|dz|khy|gy|phy|by|khr|gr|dr|phr|br))))?\.?(?<superscript>[rls]?)(?<root>k|kh|g|ng|c|ch|j|ny|t|th|d|n|p|ph|b|m|ts|tsh|dz|w|zh|z|'|y|r|l|sh|s|h)(?<subscript>[yrlw]?)(?<vowel>[aeiou])(((?<suffix>g|ng|d|n|b|m|'|r|l|s){0,1}(?<suffix2>g|s)?$)|(?<sixth>'[aeiou]))/
 
-export const wylieRegex = /(?<prefix>g(?=c|ny|t|d|n|ts|zh|z|\.y|sh|s)|d(?=k|g|ng|p|b|m|ky|gy|py|by|my|kr|gr|pr|br)|b(?=k|g|c|t|d|ts|zh|z|sh|s|ky|gy|kr|gr|rl|sl|rk|rg|rng|rj|rny|rt|rd|rn|rts|rdz|lt|ld|st|sk|sg|sng|sny|st|sd|sn|sts|rky|rgy|sky|sgy|skr|sgr)|m(?=:kh|g|ng|ch|j|ny|th|d|n|tsh|dz|khy|gy|khr|gr)|'(?=kh|g|ch|j|th|d|ph|b|tsh|dz|khy|gy|phy|by|khr|gr|dr|phr|br))?\.?(?<superscript>l(?=k|g|ng|c|j|t|d|p|b|h)|r(?=k|g|ng|j|ny|t|d|n|b|m|ts|dz|ky|gy|my)|s(?=k|g|ng|ny|t|d|n|p|b|m|ts|ky|gy|py|by|my|kr|gr|pr|mr|nr))?(?<root>k|kh|g|ng|c|ch|j|ny|t|th|d|n|p|ph|b|m|ts|tsh|dz|w|zh|z|'|y|r|l|sh|s|h)(?<subscript>[yrlw]?)(?<vowel>[aeiou])(((?<suffix>g|ng|d|n|b|m|'|r|l|s){0,1}(?<suffix2>g|s)?$)|(?<sixth>'[aeiou]))/
+export const wylieRegex = /(?<prefix>g(?=c|ny|t|d|n|ts|zh|z|\.y|sh|s)|d(?=k|g|ng|p|b|m|ky|gy|py|by|my|kr|gr|pr|br)|b(?=k|g|c|t|d|ts|zh|z|sh|s|ky|gy|kr|gr|rl|sl|rk|rg|rng|rj|rny|rt|rd|rn|rts|rdz|lt|ld|st|sk|sg|sng|sny|st|sd|sn|sts|rky|rgy|sky|sgy|skr|sgr)|m(?=:kh|g|ng|ch|j|ny|th|d|n|tsh|dz|khy|gy|khr|gr)|'(?=kh|g|ch|j|th|d|ph|b|tsh|dz|khy|gy|phy|by|khr|gr|dr|phr|br))?\.?(?<superscript>l(?=k|g|ng|c|j|t|d|p|b|h)|r(?=k|g|ng|j|ny|t|d|n|b|m|ts|dz|ky|gy|my)|s(?=k|g|ng|ny|t|d|n|p|b|m|ts|ky|gy|py|by|my|kr|gr|pr|mr|nr))?(?<root>k|kh|g|ng|c|ch|j|ny|t|th|d|n|p|ph|b|m|ts|tsh|dz|w|zh|z|'|y|r|l|sh|s|h)(?<subscript>[yrlw]?)(?<vowel>[aeiou])(((?<suffix>g|ng|d|n|b|m|'|r|l|s){0,1}(?<suffix2>g|s)?$)|(?<sixth>'[aeiou])) ?/
 
 
 export const isWylie = (input) => {
@@ -68,8 +68,10 @@ export function breakWylie(input) {
 }
 */
 
+// This expects one syllable of regular Wylie, not extended. It
+// cannot handle EWTS with Sanskrit and what not.
 export const matchRegex = (string) => {
-  const wylie = toWylieIfNecessary(string)
+  const wylie = toWylieIfNecessary(string).trim()
   const result = wylie.match(wylieRegex)
   if (!result) return false
 
@@ -193,46 +195,61 @@ export function canSubscriptWa(letter) {
 export const stacksWithSubscribedWa = "ཀྭ་ཁྭ་གྭ་ཅྭ་ཉྭ་ཏྭ་དྭ་ཙྭ་ཚྭ་ཞྭ་ཟྭ་རྭ་ལྭ་ཤྭ་སྭ་ཧྭ་གྲྭ་དྲྭ་ཕྱྭ་རྒྭ་རྩྭ་"
 
 export function hasSuperscribedRa(toTest) {
-  return /^(g|d|b|m|')?r[^aiuoe]/.test(toWylieIfNecessary(toTest))
+  //return /^(g|d|b|m|')?r[^aiuoe]/.test(toWylieIfNecessary(toTest))
+  return getSuperscript(toTest) === "r"
 }
 
 export function hasSuperscribedLa(toTest) {
-  return /^(g|th|b|m|')?l[^aiuoe]/.test(toWylieIfNecessary(toTest))
+  //return /^(g|th|b|m|')?l[^aiuoe]/.test(toWylieIfNecessary(toTest))
+  return getSuperscript(toTest) === "l"
 }
 
 export function hasSuperscribedSa(toTest) {
-  return /^(g|d|b|m|')?s[^aiuoe]/.test(toWylieIfNecessary(toTest))
+  //return /^(g|d|b|m|')?s[^aiuoe]/.test(toWylieIfNecessary(toTest))
+  return getSuperscript(toTest) === "s"
 }
 
+
 export function hasSubscribedRa(toTest) {
-  return /^(g|d|b|m|')?[^aiuoe]{1,2}r[aeiou]/.test(toWylieIfNecessary(toTest))
+  //return /^(g|d|b|m|')?[^aiuoe]{1,2}r[aeiou]/.test(toWylieIfNecessary(toTest))
+  return getSubscript(toTest) === "r"
 }
 
 export function hasSubscribedYa(toTest) {
-  return /^(g.|d|b|m|')?[^aiuoen]{1,2}y[aeiou]/.test(toWylieIfNecessary(toTest))
+  //return /^(g.|d|b|m|')?[^aiuoen]{1,2}y[aeiou]/.test(toWylieIfNecessary(toTest))
+  return getSubscript(toTest) === "y"
 }
 
 export function hasSubscribedLa(toTest) {
-  return /^(g|d|b|m|')?[^aiuoe]{1,2}l[aeiou]/.test(toWylieIfNecessary(toTest))
+  //return /^(g|d|b|m|')?[^aiuoe]{1,2}l[aeiou]/.test(toWylieIfNecessary(toTest))
+  return getSubscript(toTest) === "l"
+}
+
+export function getSubscript(toTest) {
+  const matches = matchRegex(toTest)
+  if (!matches || !matches.subscript) return false
+  else return matches.subscript
+}
+
+export function getSuperscript(toTest) {
+  const matches = matchRegex(toTest)
+  if (!matches || !matches.superscript) return false
+  else return matches.superscript
 }
 
 export function hasSubscript(toTest) {
-  return /^(g|d|b|m|')?[^aiuoen]{1,2}[ryl][aeiou]/.test(toWylieIfNecessary(toTest))
-}
-
-export function hasSubscript2(toTest) {
   const matches = matchRegex(toTest)
-  //console.log(matches)
-  return matches.subscript != null
+  return matches != null && matches.subscript != null
 }
 
 export function hasSuperscript(toTest) {
-  if (hasSubscribedLa(toTest)) return false
-  else return /^(g|d|b|m|')?[lrs](?!h)[^aiuoe]{1,2}[aeiou]/.test(toWylieIfNecessary(toTest))
+  const matches = matchRegex(toTest)
+  return matches != null && matches.superscript != null
 }
 
 export function hasSubscriptOrSuperscript(toTest) {
-  return hasSubscript(toTest) || hasSuperscript(toTest)
+  const matches = matchRegex(toTest)
+  return matches != null && (matches.superscript || matches.subscript)
 }
 
 export const rootsForPrefixBaUnicode = 'ཀ ཅ ཏ ཙ ག ང ཇ ཉ ད ན ཛ ཞ ཟ ར ཤ ས'.split(' ')

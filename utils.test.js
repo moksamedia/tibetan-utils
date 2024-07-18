@@ -45,25 +45,25 @@ test("toWylieIfNecessary", () => {
 })
 
 test("canSuperscriptRa", () => {
-	expect(tu.canSuperscriptRa("ca")).toEqual(false)
-	expect(tu.canSuperscriptRa("ཅ")).toEqual(false)
+	expect(tu.canSuperscriptRa("ca")).toBeFalsy()
+	expect(tu.canSuperscriptRa("ཅ")).toBeFalsy()
 	expect(tu.canSuperscriptRa("tsa")).toEqual(true)
 	expect(tu.canSuperscriptRa("ཏ")).toEqual(true)
 	expect(tu.canSuperscriptRa("gya")).toEqual(true)
 })
 
 test("canSuperscriptLa", () => {
-	expect(tu.canSuperscriptLa("dza")).toEqual(false)
-	expect(tu.canSuperscriptLa("ཛ")).toEqual(false)
+	expect(tu.canSuperscriptLa("dza")).toBeFalsy()
+	expect(tu.canSuperscriptLa("ཛ")).toBeFalsy()
 	expect(tu.canSuperscriptLa("ka")).toEqual(true)
 	expect(tu.canSuperscriptLa("ང")).toEqual(true)
 })
 
 
 test("hasSuperscribedRa", () => {
-	expect(tu.hasSuperscribedRa("dza")).toEqual(false)
-	expect(tu.hasSuperscribedRa("ཛ")).toEqual(false)
-	expect(tu.hasSuperscribedRa("grob")).toEqual(false)
+	expect(tu.hasSuperscribedRa("dza")).toBeFalsy()
+	expect(tu.hasSuperscribedRa("ཛ")).toBeFalsy()
+	expect(tu.hasSuperscribedRa("grob")).toBeFalsy()
 	expect(tu.hasSuperscribedRa("རྫ")).toEqual(true)
 	expect(tu.hasSuperscribedRa("རྒྱེད་")).toEqual(true)
 	expect(tu.hasSuperscribedRa("rkyob")).toEqual(true)
@@ -75,33 +75,33 @@ test.concurrent.each("རྐ རྒ རྔ རྗ རྙ རྟ རྡ རྣ �
 })
 
 test("hasSuperscribedLa", () => {
-	expect(tu.hasSuperscribedLa("dza")).toEqual(false)
-	expect(tu.hasSuperscribedLa("ཛ")).toEqual(false)
-	expect(tu.hasSuperscribedLa("grob")).toEqual(false)
+	expect(tu.hasSuperscribedLa("dza")).toBeFalsy()
+	expect(tu.hasSuperscribedLa("ཛ")).toBeFalsy()
+	expect(tu.hasSuperscribedLa("grob")).toBeFalsy()
 	expect(tu.hasSuperscribedLa("ལྡ་")).toEqual(true)
 	expect(tu.hasSuperscribedLa("ལྒེ་")).toEqual(true)
-	expect(tu.hasSuperscribedLa("rkyob")).toEqual(false)
-	expect(tu.hasSuperscribedLa("ཀླིས")).toEqual(false)
-	expect(tu.hasSuperscribedSa("sla")).toEqual(true)
-	expect(tu.hasSuperscribedSa("སླ་")).toEqual(true)
+	expect(tu.hasSuperscribedLa("rkyob")).toBeFalsy()
+	expect(tu.hasSuperscribedLa("ཀླིས")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("sla")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("སླ་")).toBeFalsy()
 })
 
 test("hasSuperscribedSa", () => {
-	expect(tu.hasSuperscribedSa("dza")).toEqual(false)
-	expect(tu.hasSuperscribedSa("ཛ")).toEqual(false)
-	expect(tu.hasSuperscribedSa("grob")).toEqual(false)
-	expect(tu.hasSuperscribedSa("རྫ")).toEqual(false)
-	expect(tu.hasSuperscribedSa("རྒྱེད་")).toEqual(false)
-	expect(tu.hasSuperscribedSa("rkyob")).toEqual(false)
+	expect(tu.hasSuperscribedSa("dza")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("ཛ")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("grob")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("རྫ")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("རྒྱེད་")).toBeFalsy()
+	expect(tu.hasSuperscribedSa("rkyob")).toBeFalsy()
 	expect(tu.hasSuperscribedSa("skyed")).toEqual(true)
 	expect(tu.hasSuperscribedSa("སྟ་")).toEqual(true)
 	expect(tu.hasSuperscribedSa("smrogs")).toEqual(true)
 })
 
 test("hasSubscribedRa", () => {
-	expect(tu.hasSubscribedRa("rdza")).toEqual(false)
-	expect(tu.hasSubscribedRa("ཛ")).toEqual(false)
-	expect(tu.hasSubscribedRa("rgyob")).toEqual(false)
+	expect(tu.hasSubscribedRa("rdza")).toBeFalsy()
+	expect(tu.hasSubscribedRa("ཛ")).toBeFalsy()
+	expect(tu.hasSubscribedRa("rgyob")).toBeFalsy()
 	expect(tu.hasSubscribedRa("ཁྲ")).toEqual(true)
 	expect(tu.hasSubscribedRa("khra")).toEqual(true)
 	expect(tu.hasSubscribedRa("khred")).toEqual(true)
@@ -114,14 +114,14 @@ test.each("ཀྲ ཁྲ གྲ ཏྲ ཐྲ དྲ པྲ ཕྲ བྲ མྲ
 })
 
 test("hasSubscribedYa", () => {
-	expect(tu.hasSubscribedYa("rdza")).toEqual(false)
-	expect(tu.hasSubscribedYa("nya")).toEqual(false)
-	expect(tu.hasSubscribedYa("ཉ")).toEqual(false)
-	expect(tu.hasSubscribedYa("ཛ")).toEqual(false)
-	expect(tu.hasSubscribedYa("ཁྲ")).toEqual(false)
-	expect(tu.hasSubscribedYa("khra")).toEqual(false)
-	expect(tu.hasSubscribedYa("ཧྲིག")).toEqual(false)
-	expect(tu.hasSubscribedYa("hrig")).toEqual(false)
+	expect(tu.hasSubscribedYa("rdza")).toBeFalsy()
+	expect(tu.hasSubscribedYa("nya")).toBeFalsy()
+	expect(tu.hasSubscribedYa("ཉ")).toBeFalsy()
+	expect(tu.hasSubscribedYa("ཛ")).toBeFalsy()
+	expect(tu.hasSubscribedYa("ཁྲ")).toBeFalsy()
+	expect(tu.hasSubscribedYa("khra")).toBeFalsy()
+	expect(tu.hasSubscribedYa("ཧྲིག")).toBeFalsy()
+	expect(tu.hasSubscribedYa("hrig")).toBeFalsy()
 	expect(tu.hasSubscribedYa("gyag")).toEqual(true)
 	expect(tu.hasSubscribedYa("kya")).toEqual(true)
 	expect(tu.hasSubscribedYa("kyid")).toEqual(true)
@@ -131,12 +131,12 @@ test("hasSubscribedYa", () => {
 })
 
 test("hasSubscribedLa", () => {
-	expect(tu.hasSubscribedLa("rdza")).toEqual(false)
-	expect(tu.hasSubscribedLa("ཛ")).toEqual(false)
-	expect(tu.hasSubscribedLa("rgyob")).toEqual(false)
-	expect(tu.hasSubscribedLa("སྒྱ")).toEqual(false)
-	expect(tu.hasSubscribedLa("སྒྱུར")).toEqual(false)
-	expect(tu.hasSubscribedLa("ཧྲིག")).toEqual(false)
+	expect(tu.hasSubscribedLa("rdza")).toBeFalsy()
+	expect(tu.hasSubscribedLa("ཛ")).toBeFalsy()
+	expect(tu.hasSubscribedLa("rgyob")).toBeFalsy()
+	expect(tu.hasSubscribedLa("སྒྱ")).toBeFalsy()
+	expect(tu.hasSubscribedLa("སྒྱུར")).toBeFalsy()
+	expect(tu.hasSubscribedLa("ཧྲིག")).toBeFalsy()
 })
 
 test.each("ཀླ གླ བླ ཟླ རླ སླ".split(' '))("hasSubscribedLa true", (input) => {
@@ -144,14 +144,14 @@ test.each("ཀླ གླ བླ ཟླ རླ སླ".split(' '))("hasSubscribed
 })
 
 test("hasSubscript", () => {
-	expect(tu.hasSubscript("rdza")).toEqual(false)
-	expect(tu.hasSubscript("la")).toEqual(false)
-	expect(tu.hasSubscript("tha")).toEqual(false)
-	expect(tu.hasSubscript("cha")).toEqual(false)
-	expect(tu.hasSubscript("na")).toEqual(false)
-	expect(tu.hasSubscript("nya")).toEqual(false)
-	expect(tu.hasSubscript("sked")).toEqual(false)
-	expect(tu.hasSubscript("sha")).toEqual(false)
+	expect(tu.hasSubscript("rdza")).toBeFalsy()
+	expect(tu.hasSubscript("la")).toBeFalsy()
+	expect(tu.hasSubscript("tha")).toBeFalsy()
+	expect(tu.hasSubscript("cha")).toBeFalsy()
+	expect(tu.hasSubscript("na")).toBeFalsy()
+	expect(tu.hasSubscript("nya")).toBeFalsy()
+	expect(tu.hasSubscript("sked")).toBeFalsy()
+	expect(tu.hasSubscript("sha")).toBeFalsy()
 
 	expect(tu.hasSubscript("སླ")).toEqual(true)
 	expect(tu.hasSubscript("gros")).toEqual(true)
@@ -160,16 +160,16 @@ test("hasSubscript", () => {
 })
 
 test("hasSuperscript", () => {
-	expect(tu.hasSuperscript("la")).toEqual(false)
-	expect(tu.hasSuperscript("tha")).toEqual(false)
-	expect(tu.hasSuperscript("cha")).toEqual(false)
-	expect(tu.hasSuperscript("na")).toEqual(false)
-	expect(tu.hasSuperscript("nya")).toEqual(false)
-	expect(tu.hasSuperscript("sla")).toEqual(false)
-	expect(tu.hasSuperscript("སླ")).toEqual(false)
-	expect(tu.hasSuperscript("gros")).toEqual(false)
-	expect(tu.hasSuperscript("bthrad")).toEqual(false)
-	expect(tu.hasSuperscript("sha")).toEqual(false)
+	expect(tu.hasSuperscript("la")).toBeFalsy()
+	expect(tu.hasSuperscript("tha")).toBeFalsy()
+	expect(tu.hasSuperscript("cha")).toBeFalsy()
+	expect(tu.hasSuperscript("na")).toBeFalsy()
+	expect(tu.hasSuperscript("nya")).toBeFalsy()
+	expect(tu.hasSuperscript("sla")).toBeFalsy()
+	expect(tu.hasSuperscript("སླ")).toBeFalsy()
+	expect(tu.hasSuperscript("gros")).toBeFalsy()
+	expect(tu.hasSuperscript("bthrad")).toBeFalsy()
+	expect(tu.hasSuperscript("sha")).toBeFalsy()
 
 	expect(tu.hasSuperscript("skyed")).toEqual(true)
 	expect(tu.hasSuperscript("rdza")).toEqual(true)
@@ -177,7 +177,7 @@ test("hasSuperscript", () => {
 })
 
 test("hasSubscriptOrSuperscript", () => {
-	expect(tu.hasSubscriptOrSuperscript("sha")).toEqual(false)
+	expect(tu.hasSubscriptOrSuperscript("sha")).toBeFalsy()
 })
 
 test("wylieRegex", () => {
@@ -276,8 +276,6 @@ test("wylieRegex", () => {
         sixth: null
       })
 
-	  console.log("-------------")
-	  console.log(tu.matchRegex("སླ"))
 	  expect(tu.matchRegex("སླ")).toEqual({
 		match: "sla",
         prefix: null,
@@ -289,21 +287,32 @@ test("wylieRegex", () => {
         suffix2: null,
         sixth: null
       })
+	  expect(tu.matchRegex("སྤྲེའུ་")).toEqual({
+		match: "spre'u",
+        prefix: null,
+        superscript: "s",
+        root: 'p',
+        subscript: 'r',
+        vowel: 'e',
+        suffix: null,
+        suffix2: null,
+        sixth: "'u"
+      })
 
 })
 
-
+/*
 const t0 = performance.now();
 
 for (let i=0; i<1000;i++) {
-	expect(tu.hasSubscript("rdza")).toEqual(false)
-	expect(tu.hasSubscript("la")).toEqual(false)
-	expect(tu.hasSubscript("tha")).toEqual(false)
-	expect(tu.hasSubscript("cha")).toEqual(false)
-	expect(tu.hasSubscript("na")).toEqual(false)
-	expect(tu.hasSubscript("nya")).toEqual(false)
-	expect(tu.hasSubscript("sked")).toEqual(false)
-	expect(tu.hasSubscript("sha")).toEqual(false)
+	expect(tu.hasSubscript("rdza")).toBeFalsy()
+	expect(tu.hasSubscript("la")).toBeFalsy()
+	expect(tu.hasSubscript("tha")).toBeFalsy()
+	expect(tu.hasSubscript("cha")).toBeFalsy()
+	expect(tu.hasSubscript("na")).toBeFalsy()
+	expect(tu.hasSubscript("nya")).toBeFalsy()
+	expect(tu.hasSubscript("sked")).toBeFalsy()
+	expect(tu.hasSubscript("sha")).toBeFalsy()
 	expect(tu.hasSubscript("སླ་")).toEqual(true)
 	expect(tu.hasSubscript("gros")).toEqual(true)
 	expect(tu.hasSubscript("thrad")).toEqual(true)
@@ -316,14 +325,14 @@ console.log(`Call to doSomething took ${t1 - t0} milliseconds.`);
 const t2 = performance.now();
 
 for (let i=0; i<1000;i++) {
-	expect(tu.hasSubscript2("rdza")).toEqual(false)
-	expect(tu.hasSubscript2("la")).toEqual(false)
-	expect(tu.hasSubscript2("tha")).toEqual(false)
-	expect(tu.hasSubscript2("cha")).toEqual(false)
-	expect(tu.hasSubscript2("na")).toEqual(false)
-	expect(tu.hasSubscript2("nya")).toEqual(false)
-	expect(tu.hasSubscript2("sked")).toEqual(false)
-	expect(tu.hasSubscript2("sha")).toEqual(false)
+	expect(tu.hasSubscript2("rdza")).toBeFalsy()
+	expect(tu.hasSubscript2("la")).toBeFalsy()
+	expect(tu.hasSubscript2("tha")).toBeFalsy()
+	expect(tu.hasSubscript2("cha")).toBeFalsy()
+	expect(tu.hasSubscript2("na")).toBeFalsy()
+	expect(tu.hasSubscript2("nya")).toBeFalsy()
+	expect(tu.hasSubscript2("sked")).toBeFalsy()
+	expect(tu.hasSubscript2("sha")).toBeFalsy()
 	expect(tu.hasSubscript2("སླ")).toEqual(true)
 	expect(tu.hasSubscript2("gros")).toEqual(true)
 	expect(tu.hasSubscript2("thrad")).toEqual(true)
@@ -332,3 +341,4 @@ for (let i=0; i<1000;i++) {
 
 const t3 = performance.now();
 console.log(`Call to doSomething took ${t3 - t2} milliseconds.`);
+*/
